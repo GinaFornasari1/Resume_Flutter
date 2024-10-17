@@ -1,4 +1,6 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flip_card/flip_card.dart';
 
@@ -16,7 +18,7 @@ class _MainPageWidgetState extends State<MainPage>
   late MainPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  CardSwiperController cardSwiperController = CardSwiperController();
   //final animationsMap = <String, AnimationInfo>{};
 
   @override
@@ -31,7 +33,15 @@ class _MainPageWidgetState extends State<MainPage>
           body: SafeArea(
               top: true,
               child: SingleChildScrollView(
-                child: Column(),
+                child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      flipCardCell(),
+                      DescriptionCell(),
+                      SkillsSwipe(),
+                      //SkillsCheckList(),
+                    ]),
               ))),
     );
   }
@@ -41,10 +51,6 @@ class _MainPageWidgetState extends State<MainPage>
       backgroundColor: const Color.fromARGB(255, 39, 101, 41),
       automaticallyImplyLeading: false,
       leading: IconButton(
-        //borderColor: Colors.transparent,
-        //borderRadius: 30,
-        //borderWidth: 1,
-        //buttonSize: 60,
         icon: Icon(
           Icons.more_vert_sharp,
           color: Colors.white,
@@ -161,21 +167,80 @@ class _MainPageWidgetState extends State<MainPage>
         ));
   }
 
-  AppBar appBar() {
-    return AppBar(
-        title: Text('Gina Fornasari',
-            style: TextStyle(
-                color: Colors.black,
-                fontSize: 18,
-                fontWeight: FontWeight.bold)),
-        backgroundColor: Color.fromARGB(255, 153, 114, 164),
-        elevation: 2,
-        centerTitle: false,
-        leading: GestureDetector(
-          onTap: () {},
-          child: Container(
-              margin: EdgeInsets.all(14),
-              child: SvgPicture.asset('assets/icons/dots.svg')),
-        ));
+  Container DescriptionCell() {
+    return Container(
+      width: 396,
+      height: 123,
+      decoration: BoxDecoration(color: Color.fromARGB(255, 210, 237, 245)),
+      child: Align(
+        alignment: AlignmentDirectional(-1, 0),
+        child: Padding(
+          padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
+          child: Text(
+            'Hello World\nHire me and pay me lots of money \nblah blah \nblah blah lol      lol   ojojoihiuhhuytfrtvsesrtfessebbrfrdvdtb  ',
+            textAlign: TextAlign.start,
+            // ).animateOnPageLoad(
+            //     animationsMap['textOnPageLoadAnimation1']!),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Container SkillsSwipe() {
+    return Container(
+        width: 400,
+        height: 202,
+        decoration: BoxDecoration(color: Colors.orange),
+        child: Stack(children: [
+          ConstrainedBox(
+            constraints: BoxConstraints.expand(),
+            child: Image.network(
+              'https://picsum.photos/seed/280/600',
+              width: 90,
+              height: 90,
+              fit: BoxFit.fill,
+            ),
+          ),
+          Swiper(
+            itemCount: 4,
+            pagination: const SwiperPagination(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
+                builder: DotSwiperPaginationBuilder(
+                    color: Colors.white,
+                    activeColor: Colors.white,
+                    size: 20,
+                    activeSize: 20)),
+            layout: SwiperLayout.CUSTOM,
+            itemWidth: 310,
+            itemHeight: 400,
+            customLayoutOption: CustomLayoutOption(
+              startIndex: -1,
+              stateCount: 3,
+            )
+              ..addRotate([-45 / 180, 0, 45 / 100])
+              ..addTranslate([
+                const Offset(-370, -40),
+                const Offset(0, 0),
+                const Offset(370, -40)
+              ]),
+            itemBuilder: (context, index) {
+              return Row(children: [
+                Card(
+                    child: SizedBox(
+                        height: 300,
+                        width: 300,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                              'https://picsum.photos/seed/280/600',
+                              width: 90,
+                              height: 90,
+                              fit: BoxFit.cover,
+                            ))))
+              ]);
+            },
+          )
+        ]));
   }
 }
