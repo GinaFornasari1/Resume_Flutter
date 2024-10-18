@@ -1,9 +1,7 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:flip_card/flip_card.dart';
-
 import 'Main_page_model.dart';
 //import 'package:flutter_svg/flutter_svg.dart';
 
@@ -28,8 +26,8 @@ class _MainPageWidgetState extends State<MainPage>
       child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
-          drawer: Contact_Drawer(),
-          appBar: MyAppBar(),
+          drawer: contact_drawer(),
+          appBar: my_appBar(),
           body: SafeArea(
               top: true,
               child: SingleChildScrollView(
@@ -40,18 +38,18 @@ class _MainPageWidgetState extends State<MainPage>
                       flipCardCell(),
                       DescriptionCell(),
                       SkillsSwipe(),
-                      //SkillsCheckList(),
+                      skills_checklist()
                     ]),
               ))),
     );
   }
 
-  AppBar MyAppBar() {
+  AppBar my_appBar() {
     return AppBar(
       backgroundColor: const Color.fromARGB(255, 39, 101, 41),
       automaticallyImplyLeading: false,
       leading: IconButton(
-        icon: Icon(
+        icon: const Icon(
           Icons.more_vert_sharp,
           color: Colors.white,
           size: 30,
@@ -60,7 +58,7 @@ class _MainPageWidgetState extends State<MainPage>
           scaffoldKey.currentState!.openDrawer();
         },
       ),
-      title: Text('Gina Fornasari',
+      title: const Text('Gina Fornasari',
           style: TextStyle(color: Colors.white, fontSize: 25)),
       actions: [],
       centerTitle: false,
@@ -68,13 +66,13 @@ class _MainPageWidgetState extends State<MainPage>
     );
   }
 
-  Drawer Contact_Drawer() {
+  Drawer contact_drawer() {
     return Drawer(
       elevation: 16,
       child: Container(
         width: 100,
         height: 100,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
         ),
         child: Column(
@@ -83,19 +81,19 @@ class _MainPageWidgetState extends State<MainPage>
             Container(
               width: 316,
               height: 243,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.rectangle,
               ),
               child: Align(
-                alignment: AlignmentDirectional(0, 0),
+                alignment: const AlignmentDirectional(0, 0),
                 child: Container(
                   width: 220,
                   height: 220,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      alignment: AlignmentDirectional(0, 0),
+                      alignment: const AlignmentDirectional(0, 0),
                       image: Image.network(
                         'https://picsum.photos/seed/979/600',
                       ).image,
@@ -115,9 +113,10 @@ class _MainPageWidgetState extends State<MainPage>
     return Container(
         width: 391,
         height: 202,
-        decoration: BoxDecoration(color: Color.fromARGB(255, 193, 186, 206)),
+        decoration:
+            const BoxDecoration(color: Color.fromARGB(255, 193, 186, 206)),
         child: Align(
-          alignment: AlignmentDirectional(0, 0),
+          alignment: const AlignmentDirectional(0, 0),
           child: FlipCard(
             fill: Fill.fillBack,
             direction: FlipDirection.HORIZONTAL,
@@ -125,7 +124,7 @@ class _MainPageWidgetState extends State<MainPage>
             front: Container(
               width: 190,
               height: 190,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.black,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(12),
@@ -141,14 +140,14 @@ class _MainPageWidgetState extends State<MainPage>
                   width: 132,
                   height: 151,
                   fit: BoxFit.scaleDown,
-                  alignment: Alignment(0, 0),
+                  alignment: const Alignment(0, 0),
                 ),
               ),
             ),
             back: Container(
               width: 190,
               height: 190,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.blue,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(12),
@@ -157,7 +156,7 @@ class _MainPageWidgetState extends State<MainPage>
                   topRight: Radius.circular(12),
                 ),
               ),
-              child: Align(
+              child: const Align(
                 alignment: AlignmentDirectional(0, 0),
                 child: Text(
                     'Yes I am so great \nHire me and pay me lots of money \nblah blah blah'),
@@ -171,8 +170,9 @@ class _MainPageWidgetState extends State<MainPage>
     return Container(
       width: 396,
       height: 123,
-      decoration: BoxDecoration(color: Color.fromARGB(255, 210, 237, 245)),
-      child: Align(
+      decoration:
+          const BoxDecoration(color: Color.fromARGB(255, 210, 237, 245)),
+      child: const Align(
         alignment: AlignmentDirectional(-1, 0),
         child: Padding(
           padding: EdgeInsetsDirectional.fromSTEB(20, 0, 0, 0),
@@ -191,10 +191,10 @@ class _MainPageWidgetState extends State<MainPage>
     return Container(
         width: 400,
         height: 202,
-        decoration: BoxDecoration(color: Colors.orange),
+        decoration: const BoxDecoration(color: Colors.orange),
         child: Stack(children: [
           ConstrainedBox(
-            constraints: BoxConstraints.expand(),
+            constraints: const BoxConstraints.expand(),
             child: Image.network(
               'https://picsum.photos/seed/280/600',
               width: 90,
@@ -242,5 +242,71 @@ class _MainPageWidgetState extends State<MainPage>
             },
           )
         ]));
+  }
+
+  Container skills_checklist() {
+    return Container(
+      width: 400,
+      height: 200,
+      decoration: const BoxDecoration(
+        color: Color(0x97A98CB4),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const Flexible(
+                  child: Align(
+                    alignment: AlignmentDirectional(-1, -1),
+                    child: Text(
+                      'Hello World',
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Theme(
+                    data: ThemeData(
+                        checkboxTheme: CheckboxThemeData(
+                          visualDensity: VisualDensity.compact,
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                        ),
+                        unselectedWidgetColor: Colors.yellow),
+                    child: CheckboxListTile(
+                      value: true, //_model.checkboxListTileValue1 ??= true,
+                      onChanged: null,
+
+                      title: const Text(
+                        'Java',
+                        textAlign: TextAlign.start,
+                      ),
+                      tileColor: Colors.pink,
+                      activeColor: Colors.purple,
+                      checkColor: const Color(0xFF4B986C),
+                      dense: false,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding:
+                          const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
