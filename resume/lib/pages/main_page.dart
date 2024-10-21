@@ -245,67 +245,93 @@ class _MainPageWidgetState extends State<MainPage>
   }
 
   Container skills_checklist() {
+    bool isChecked = true;
     return Container(
-      width: 400,
-      height: 200,
-      decoration: const BoxDecoration(
-        color: Color(0x97A98CB4),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Flexible(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const Flexible(
-                  child: Align(
-                    alignment: AlignmentDirectional(-1, -1),
-                    child: Text(
-                      'Hello World',
-                      textAlign: TextAlign.start,
-                    ),
-                  ),
-                ),
-                Flexible(
-                  child: Theme(
-                    data: ThemeData(
-                        checkboxTheme: CheckboxThemeData(
-                          visualDensity: VisualDensity.compact,
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+        width: 400,
+        height: 200,
+        decoration: const BoxDecoration(
+          color: Color(0x97A98CB4),
+        ),
+        child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Flexible(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    const Flexible(
+                      child: Align(
+                        alignment: AlignmentDirectional(-.8, 0),
+                        child: Text(
+                          'languages',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(fontSize: 18),
                         ),
-                        unselectedWidgetColor: Colors.yellow),
-                    child: CheckboxListTile(
-                      value: true, //_model.checkboxListTileValue1 ??= true,
-                      onChanged: null,
-
-                      title: const Text(
-                        'Java',
-                        textAlign: TextAlign.start,
-                      ),
-                      tileColor: Colors.pink,
-                      activeColor: Colors.purple,
-                      checkColor: const Color(0xFF4B986C),
-                      dense: false,
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                  ),
+                    my_checkbox_widget("java"),
+                    my_checkbox_widget("sql"),
+                    my_checkbox_widget("other kak"),
+                  ],
                 ),
-              ],
+              ),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    const Flexible(
+                      child: Align(
+                        alignment: AlignmentDirectional(-.8, 0),
+                        child: Text(
+                          'IDEs',
+                          textAlign: TextAlign.start,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                      ),
+                    ),
+                    my_checkbox_widget("VScode"),
+                    my_checkbox_widget("sql wb"),
+                    my_checkbox_widget("other kak"),
+                  ],
+                ),
+              )
+            ]));
+  }
+
+  Flexible my_checkbox_widget(String checkbox_text) {
+    return Flexible(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+        child: Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: Colors.white),
+              borderRadius: BorderRadius.circular(20)),
+          child: CheckboxListTile(
+            value: true,
+            onChanged: (isChecked) {
+              setState(() {
+                isChecked = true;
+              });
+            },
+            title: Text(
+              checkbox_text,
+              textAlign: TextAlign.start,
+            ),
+            tileColor: const Color(0x97A98CB4),
+            activeColor: const Color(0xFF4B986C),
+            checkColor: Colors.white,
+            dense: false,
+            controlAffinity: ListTileControlAffinity.leading,
+            contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
