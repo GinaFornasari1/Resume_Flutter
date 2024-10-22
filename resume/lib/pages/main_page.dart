@@ -1,8 +1,11 @@
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
-import 'package:flip_card/flip_card.dart';
-import 'Main_page_model.dart';
+import 'package:resume/model/my_appbar.dart';
+import 'package:resume/model/my_card_swiper.dart';
+import 'package:resume/model/my_drawer.dart';
+import 'package:resume/model/my_flipcard.dart';
+
 //import 'package:flutter_svg/flutter_svg.dart';
 
 class MainPage extends StatefulWidget {
@@ -13,157 +16,51 @@ class MainPage extends StatefulWidget {
 
 class _MainPageWidgetState extends State<MainPage>
     with TickerProviderStateMixin {
-  late MainPageModel _model;
+  //late MainPageModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   CardSwiperController cardSwiperController = CardSwiperController();
+  final MyTileManager tileManager = MyTileManager();
   //final animationsMap = <String, AnimationInfo>{};
 
   @override
   Widget build(BuildContext context) {
+    List<String> myList = ['java', 'sql', 'python'];
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           key: scaffoldKey,
           backgroundColor: Colors.white,
-          drawer: contact_drawer(),
-          appBar: my_appBar(),
+          drawer: MyDrawerWidget(),
+          appBar: MyAppBarWidget(scaffoldKey: scaffoldKey),
           body: SafeArea(
               top: true,
               child: SingleChildScrollView(
                 child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    //mainAxisSize: MainAxisSize.max,
+                    //crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      flipCardCell(),
-                      DescriptionCell(),
-                      SkillsSwipe(),
-                      skills_checklist()
+                      //MyFlipCard(),
+                      //DescriptionCell(),
+                      //MyCardSwiper(),
+                      Row(
+                        //mainAxisSize: MainAxisSize.max,
+                        //crossAxisAlignment: CrossAxisAlignment.stretch,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                              child: MyTileList(
+                            myList: ['java', 'sql', 'python'],
+                          )),
+                          Expanded(
+                              child: MyTileList(
+                            myList: ['VsCode', 'WB', 'IntelliJ'],
+                          ))
+                        ],
+                      )
                     ]),
               ))),
     );
-  }
-
-  AppBar my_appBar() {
-    return AppBar(
-      backgroundColor: const Color.fromARGB(255, 39, 101, 41),
-      automaticallyImplyLeading: false,
-      leading: IconButton(
-        icon: const Icon(
-          Icons.more_vert_sharp,
-          color: Colors.white,
-          size: 30,
-        ),
-        onPressed: () async {
-          scaffoldKey.currentState!.openDrawer();
-        },
-      ),
-      title: const Text('Gina Fornasari',
-          style: TextStyle(color: Colors.white, fontSize: 25)),
-      actions: [],
-      centerTitle: false,
-      elevation: 2,
-    );
-  }
-
-  Drawer contact_drawer() {
-    return Drawer(
-      elevation: 16,
-      child: Container(
-        width: 100,
-        height: 100,
-        decoration: const BoxDecoration(
-          color: Colors.white,
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Container(
-              width: 316,
-              height: 243,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.rectangle,
-              ),
-              child: Align(
-                alignment: const AlignmentDirectional(0, 0),
-                child: Container(
-                  width: 220,
-                  height: 220,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      fit: BoxFit.cover,
-                      alignment: const AlignmentDirectional(0, 0),
-                      image: Image.network(
-                        'https://picsum.photos/seed/979/600',
-                      ).image,
-                    ),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Container flipCardCell() {
-    return Container(
-        width: 391,
-        height: 202,
-        decoration:
-            const BoxDecoration(color: Color.fromARGB(255, 193, 186, 206)),
-        child: Align(
-          alignment: const AlignmentDirectional(0, 0),
-          child: FlipCard(
-            fill: Fill.fillBack,
-            direction: FlipDirection.HORIZONTAL,
-            speed: 400,
-            front: Container(
-              width: 190,
-              height: 190,
-              decoration: const BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  bottomRight: Radius.circular(12),
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-              ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  'https://picsum.photos/seed/89/600',
-                  width: 132,
-                  height: 151,
-                  fit: BoxFit.scaleDown,
-                  alignment: const Alignment(0, 0),
-                ),
-              ),
-            ),
-            back: Container(
-              width: 190,
-              height: 190,
-              decoration: const BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(12),
-                  bottomRight: Radius.circular(12),
-                  topLeft: Radius.circular(12),
-                  topRight: Radius.circular(12),
-                ),
-              ),
-              child: const Align(
-                alignment: AlignmentDirectional(0, 0),
-                child: Text(
-                    'Yes I am so great \nHire me and pay me lots of money \nblah blah blah'),
-              ),
-            ),
-          ),
-        ));
   }
 
   Container DescriptionCell() {
@@ -171,7 +68,7 @@ class _MainPageWidgetState extends State<MainPage>
       width: 396,
       height: 123,
       decoration:
-          const BoxDecoration(color: Color.fromARGB(255, 210, 237, 245)),
+          BoxDecoration(color: Theme.of(context).colorScheme.background),
       child: const Align(
         alignment: AlignmentDirectional(-1, 0),
         child: Padding(
@@ -186,151 +83,81 @@ class _MainPageWidgetState extends State<MainPage>
       ),
     );
   }
+}
 
-  Container SkillsSwipe() {
-    return Container(
-        width: 400,
-        height: 202,
-        decoration: const BoxDecoration(color: Colors.orange),
-        child: Stack(children: [
-          ConstrainedBox(
-            constraints: const BoxConstraints.expand(),
-            child: Image.network(
-              'https://picsum.photos/seed/280/600',
-              width: 90,
-              height: 90,
-              fit: BoxFit.fill,
-            ),
-          ),
-          Swiper(
-            itemCount: 4,
-            pagination: const SwiperPagination(
-                margin: EdgeInsets.fromLTRB(0, 0, 0, 30),
-                builder: DotSwiperPaginationBuilder(
-                    color: Colors.white,
-                    activeColor: Colors.white,
-                    size: 20,
-                    activeSize: 20)),
-            layout: SwiperLayout.CUSTOM,
-            itemWidth: 310,
-            itemHeight: 400,
-            customLayoutOption: CustomLayoutOption(
-              startIndex: -1,
-              stateCount: 3,
-            )
-              ..addRotate([-45 / 180, 0, 45 / 100])
-              ..addTranslate([
-                const Offset(-370, -40),
-                const Offset(0, 0),
-                const Offset(370, -40)
-              ]),
-            itemBuilder: (context, index) {
-              return Row(children: [
-                Card(
-                    child: SizedBox(
-                        height: 300,
-                        width: 300,
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.network(
-                              'https://picsum.photos/seed/280/600',
-                              width: 90,
-                              height: 90,
-                              fit: BoxFit.cover,
-                            ))))
-              ]);
-            },
-          )
-        ]));
+// Tile stuff here
+class MyTileModel {
+  final Icon icon; // Icon to be displayed
+  final String text; // Text to be displayed
+
+  MyTileModel({required this.text})
+      : icon = Icon(Icons.check_outlined, size: 40);
+}
+
+class MyTileManager {
+  final List<MyTileModel> _tiles = [];
+
+  void addTiles(String text) {
+    _tiles.add(MyTileModel(text: text));
   }
 
-  Container skills_checklist() {
-    bool isChecked = true;
-    return Container(
-        width: 400,
-        height: 200,
-        decoration: const BoxDecoration(
-          color: Color(0x97A98CB4),
+  List<MyTileModel> get tiles => _tiles;
+}
+
+class MyTileList extends StatefulWidget {
+  final List<String> myList;
+  MyTileList({required this.myList});
+
+  @override
+  _MyTileLanguages createState() => _MyTileLanguages();
+}
+
+class _MyTileLanguages extends State<MyTileList> {
+  final MyTileManager tileManager = MyTileManager();
+  late List<String> myList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    myList = widget.myList;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      //height: double.infinity,
+      //width: double.infinity,
+
+      height: 100,
+      width: 150,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white, // Background color
+          border: Border.all(
+            color: Colors.blue, // Border color
+            width: 2, // Border width
+          ),
+          borderRadius: BorderRadius.circular(8), // Optional: rounded corners
         ),
-        child: Row(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Flexible(
-                      child: Align(
-                        alignment: AlignmentDirectional(-.8, 0),
-                        child: Text(
-                          'languages',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
-                    my_checkbox_widget("java"),
-                    my_checkbox_widget("sql"),
-                    my_checkbox_widget("other kak"),
-                  ],
-                ),
+        child: ListView.builder(
+          itemCount: myList.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Icon(Icons.check_sharp, size: 24),
+                  SizedBox(width: 10), // Example icon
+                  Text(
+                    myList[index],
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.left,
+                  ),
+                ],
               ),
-              Flexible(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const Flexible(
-                      child: Align(
-                        alignment: AlignmentDirectional(-.8, 0),
-                        child: Text(
-                          'IDEs',
-                          textAlign: TextAlign.start,
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
-                    my_checkbox_widget("VScode"),
-                    my_checkbox_widget("sql wb"),
-                    my_checkbox_widget("other kak"),
-                  ],
-                ),
-              )
-            ]));
-  }
-
-  Flexible my_checkbox_widget(String checkbox_text) {
-    return Flexible(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-        child: Container(
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.white),
-              borderRadius: BorderRadius.circular(20)),
-          child: CheckboxListTile(
-            value: true,
-            onChanged: (isChecked) {
-              setState(() {
-                isChecked = true;
-              });
-            },
-            title: Text(
-              checkbox_text,
-              textAlign: TextAlign.start,
-            ),
-            tileColor: const Color(0x97A98CB4),
-            activeColor: const Color(0xFF4B986C),
-            checkColor: Colors.white,
-            dense: false,
-            controlAffinity: ListTileControlAffinity.leading,
-            contentPadding: const EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );
