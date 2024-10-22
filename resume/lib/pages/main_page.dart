@@ -1,4 +1,3 @@
-import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:resume/model/my_appbar.dart';
@@ -25,7 +24,6 @@ class _MainPageWidgetState extends State<MainPage>
 
   @override
   Widget build(BuildContext context) {
-    List<String> myList = ['java', 'sql', 'python'];
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -40,11 +38,11 @@ class _MainPageWidgetState extends State<MainPage>
                     //mainAxisSize: MainAxisSize.max,
                     //crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      //MyFlipCard(),
-                      //DescriptionCell(),
-                      //MyCardSwiper(),
+                      MyFlipCard(),
+                      DescriptionCell(),
+                      MyCardSwiper(),
                       Row(
-                        //mainAxisSize: MainAxisSize.max,
+                        mainAxisSize: MainAxisSize.max,
                         //crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -124,41 +122,44 @@ class _MyTileLanguages extends State<MyTileList> {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      //height: double.infinity,
-      //width: double.infinity,
-
-      height: 100,
-      width: 150,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white, // Background color
-          border: Border.all(
-            color: Colors.blue, // Border color
-            width: 2, // Border width
-          ),
-          borderRadius: BorderRadius.circular(8), // Optional: rounded corners
-        ),
-        child: ListView.builder(
-          itemCount: myList.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Icon(Icons.check_sharp, size: 24),
-                  SizedBox(width: 10), // Example icon
-                  Text(
-                    myList[index],
-                    style: TextStyle(fontSize: 18),
-                    textAlign: TextAlign.left,
-                  ),
-                ],
+    return Container(
+      // decoration: BoxDecoration(
+      //   color: Colors.white, // Background color
+      //   border: Border.all(
+      //     color: Colors.blue, // Border color
+      //     width: 2, // Border width
+      //   ),
+      //   borderRadius: BorderRadius.circular(8), // Optional: rounded corners
+      // ),
+      child: ListView.builder(
+        shrinkWrap: true,
+        physics: NeverScrollableScrollPhysics(),
+        itemCount: myList.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.all(3),
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              border: Border.all(
+                color: Colors.lightBlue, // Border color
+                width: 3, // Border width
               ),
-            );
-          },
-        ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Icon(Icons.check_sharp, size: 24),
+                SizedBox(width: 10), // Example icon
+                Text(
+                  myList[index],
+                  style: TextStyle(fontSize: 18),
+                  textAlign: TextAlign.left,
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }
