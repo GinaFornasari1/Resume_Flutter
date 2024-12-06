@@ -4,6 +4,7 @@ import 'package:resume/model/my_appbar.dart';
 import 'package:resume/model/my_card_swiper.dart';
 import 'package:resume/model/my_drawer.dart';
 import 'package:resume/model/my_flipcard.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 //import 'package:flutter_svg/flutter_svg.dart';
 
@@ -36,7 +37,9 @@ class _MainPageWidgetState extends State<MainPage>
               child: SingleChildScrollView(
                 child: Column(
                     //mainAxisSize: MainAxisSize.max,
+
                     //crossAxisAlignment: CrossAxisAlignment.stretch,
+
                     children: [
                       MyFlipCard(),
                       DescriptionCell(),

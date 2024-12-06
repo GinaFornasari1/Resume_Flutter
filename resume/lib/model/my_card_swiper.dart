@@ -14,9 +14,10 @@ class _MyCardSwiperState extends State<MyCardSwiper> {
   void initState() {
     super.initState();
     // Adding some initial cards
-    cardManager.addCard('title 1', 'https://picsum.photos/seed/888/600');
-    cardManager.addCard('title 2', 'https://picsum.photos/seed/103/600');
-    cardManager.addCard('title 3', 'https://picsum.photos/seed/198/600');
+    //cardManager.addCard('title 1','https://github.com/GinaFornasari1/BlurImageProject.git'); //'https://picsum.photos/seed/888/600');
+    cardManager.addCard('Google',
+        'https://google.com'); //'title 2', 'https://picsum.photos/seed/103/600');
+    //cardManager.addCard('title 3', 'https://picsum.photos/seed/198/600');
   }
 
   ConstrainedBox SwipeBackgroundImage() {
